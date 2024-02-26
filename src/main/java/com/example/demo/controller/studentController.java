@@ -4,10 +4,12 @@ import java.util.*;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 public class studentController {
     Map<String,Student> mapIdtoStudent = new HashMap<>();
-    Map<String,Student> mapUniversitytoStudent = new HashMap<>();
+    Map<String,Student> mapUniversitytoStudent ;
 
     public String addStudent(@RequestBody String name,@RequestBody String adhar,@RequestBody int age,@RequestBody String university){
         String id = UUID.randomUUID().toString();
@@ -18,7 +20,8 @@ public class studentController {
     }
     @GetMapping("/getStudentsByUniversity/{university}")
     public List<Student> getStudentsByUniversity(@PathVariable String university) {
-        return mapUniversityToStudent.getOrDefault(university, null);
+        return (List<Student>) mapUniversitytoStudent.put(university, null);
+        
     }
 
     @GetMapping("/getStudentById/{id}")
